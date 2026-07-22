@@ -23,33 +23,30 @@
 
 <div class="ghContributors">
   {{ $url := .Get 0 }}
+  {{ $resource := resources.GetRemote $url }}
 
-  {{ with try (resources.GetRemote $url) }}
-    {{ with .Value }}
-      {{ $contributors := . | transform.Unmarshal }}
+  {{ if $resource }}
+    {{ $contributors := $resource | transform.Unmarshal }}
 
-      {{ range $contributors }}
-      <div>
-        <img
-          src="{{ .avatar_url }}"
-          class="inline"
-          width="32"
-          height="32"
-          style="height:32px; width:32px; margin-bottom:0.25em; vertical-align:middle;"
-        />
-        <label>
-          <a href="{{ .html_url }}" target="_blank">@{{ .login }}</a>
-        </label>
-        <span class="contributions">
-          {{ .contributions }} commits
-        </span>
-      </div>
-      {{ end }}
-
-    {{ else }}
-      <p>Không thể tải danh sách contributors.</p>
+    {{ range $contributors }}
+    <div>
+      <img
+        src="{{ .avatar_url }}"
+        class="inline"
+        width="32"
+        height="32"
+        style="height:32px; width:32px; margin-bottom:0.25em; vertical-align:middle;"
+      />
+      <label>
+        <a href="{{ .html_url }}" target="_blank">@{{ .login }}</a>
+      </label>
+      <span class="contributions">
+        {{ .contributions }} commits
+      </span>
+    </div>
     {{ end }}
+
   {{ else }}
-    <p>Không thể kết nối đến GitHub API.</p>
+    <p>Không thể tải danh sách contributors.</p>
   {{ end }}
 </div>
