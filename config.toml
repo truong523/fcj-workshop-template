@@ -1,4 +1,4 @@
-baseURL = "https://workshop-sample.awsfcaj.com/"
+baseURL = "https://truong-aws-workshop-git-gh-pages-nhattruong524.vercel.app/"
 relativeURLs = false
 canonifyURLs = false
 defaultContentLanguage = "en"
